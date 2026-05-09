@@ -1,7 +1,7 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Chris Palomares
+**Student ID:** 132809778
 
 > Instructions: Write at least four dated entries. Required entry types are marked below.
 > Two to five sentences per entry is sufficient. Write entries as you go, not all in one
@@ -10,12 +10,17 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [Date 5/8/2026]: Initial Plan
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Your entry here._
+I started with reading through the ASSIGNMENT.md before starting anything so I could understand the project as a whole.
+I noticed the problem is similar to the traveling Salesman style problem where the Torchbearer has to visit all relic nodes in the 
+cheapest order possible in a weighted directed graph. My plan is to first use Dijkstra's algorithm to precompute shortest paths between
+important nodes, and then I will use a backtracking search to test different relic orders while pruning expensive paths early.
+I think the pruning section will probably be the hardest part because a bad lower bound could accidentally remove the optimal
+solution. I also plan to test each function separately before combining everything together.
 
 ---
 
