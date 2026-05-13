@@ -4,17 +4,9 @@
 **Student ID:** 132809778
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
-
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
   Running Dijkstra from S only tells us the cheapest way to get from the start node to every other node. It does not figure out the best order to visit all of the relic chambers, and different orders can lead to very different total fuel costs.
@@ -31,16 +23,12 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
 | Spawn node  | The Torchbearer starts here, so the algorithm needs shortest path costs from this node to every important location  |
 | Relic nodes | The algorithm needs shortest path costs betweeen relic chambers so it can compare different possible collection orders. |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
 
 | Property | Your answer |
 |---|---|
@@ -51,8 +39,6 @@
 | Why O(1) lookup is possible | Python dictionaries use hash tables, so values can be accessed directly using keys |
 
 ### Part 2c: Precomputation Complexity
-
-> State the total complexity and show the arithmetic. Two to three lines max.
 
 - **Number of Dijkstra runs:** k + 1 runs where k is the number of relics
 - **Cost per run:** 0((V + E) log V)

@@ -2,18 +2,9 @@
 
 **Student Name:** Chris Palomares
 **Student ID:** 132809778
-
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – [Date 5/8/2026]: Initial Plan
-
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
 
 I started with reading through the ASSIGNMENT.md before starting anything so I could understand the project as a whole.
 I noticed the problem is similar to the traveling Salesman style problem where the Torchbearer has to visit all relic nodes in the 
@@ -24,10 +15,8 @@ solution. I also plan to test each function separately before combining everythi
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [5/12/2026]: [Dijkstra Implementation and Debugging]
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
 
 I started with working on implementing Dijkstra's algorithm and the distance precomputation table. I then ran into a bug
 where my code was not precompute_distance was running correctly and this was due to me accidently running 
