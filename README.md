@@ -49,38 +49,28 @@
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
 
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
-
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  Once a node is finalized, its distance is the true shortest distance from the source. The algorithm will not need to improve that node again.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  For nodes still outside the finalized set, dist stores the best distance found so far using paths that only go through already finalized nodes.
 
 ### Part 3b: Why Each Phase Holds
 
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  Before the first loop, the source has distance 0 and every other node starts at infinity. This is correct because no paths have been explored yet.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  The algorithm always chooses the unfinished node with the smallest current distance. Because all edge weights are nonnegatieve, no later path through another unfinished node can make it cheaper.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  When the algorithm terminates, all nodes are finalized and their distances are correct. Unreachable nodes remain at infinity.
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
-
-_Your answer here._
+The route planner needs correct shortest path distances so it can compare relic orders using accurate fuel costs
 
 ---
 

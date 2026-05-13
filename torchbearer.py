@@ -153,9 +153,31 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    TODO
     """
-    return "TODO"
+    return (
+        "For ndoes already finalized: " \
+        "Once a node is finalized, its distance is the true shortest distance from the source. "
+        "The algorithm will not need to improve that node again. \n\n" 
+
+        "For nodes not yet finalized: " \
+        "For nodes still outside the finalized set, dist stores the best distance found so far using paths "
+        "that only go through already finalized nodes.\n\n"
+
+        "Inititalization: " \
+        "Before the first loop, the source has distance 0 and every other node starts at infinity. "
+        "This is correct because no paths have been explored yet. \n\n"
+
+        "Maintenance: " \
+        "The algorithm always chooses the unfinished node with the smallest current distance. "
+        "Because all edge weights are nonnegatieve, no later path through another unfinished node can make it cheaper.\n\n "
+        
+        "Termination: " \
+        "When the algorithm terminates, all nodes are finalized and their distances are correct. "
+        "Unreachable nodes remain at infinity.\n\n"
+
+        "Why this matters for the route planner: " \
+        "The route planner needs correct shortest path distances so it can compare relic orders using accurate fuel costs "
+    )
 
 
 # =============================================================================

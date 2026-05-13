@@ -27,9 +27,13 @@ path costs were being calculated correctly before moving on to the recursive sea
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [5/12/2026]: [Correctness and Search Design]
 
-_Your entry here._
+I started with reveiwing how Dijkstra's invariant guarantees that finalized nodes always have the true shortest path distance.
+At first I was confused about why the minimum distance node could safely be finalized immediately, but after reviewing the rolel of 
+nonnegative edge weights I was able to make more sense of it. I also started working on the search design section and realized that a greedy strategy
+of always taking the closest relic does no always produce the minimum total route cost. So I decided the final solution would need a recursive 
+search that explores different relic collection orders.
 
 ---
 
