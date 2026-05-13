@@ -37,8 +37,8 @@ def explain_problem():
             "Running Dijkstra from S only tells us the cheapest way to get from the start node to every other node. " \
             "It does not figure out the best order to visit all of the relic chambers, and different orders can lead to very different total fuel costs. \n\n" \
             "What decision remains after all inter-location costs are known: " \
-            "Even after finding the cheapest distances between all important locations, we still have to determine the optimal order to visit them. "\
-            "decide the order to collect the relics. Some orders are much cheaper overall than others, so the " \
+            "Even after finding the cheapest distances between all important locations, we still have to decide the order to collect the relics "\
+            "Some orders are much cheaper overall than others, so the " \
             "algorithm still has to compare different possibilities. \n\n" \
             "Why this requires a search over orders (one sentence): " \
             "The total fuel cost depends on the order the relics are visited, so the algorithm has to search " \
@@ -65,7 +65,18 @@ def select_sources(spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    # Sources: spawn + every relic chamber
+    # We run Dijkstra from each so we can look up cheapest cost from S or any
+    # relic to any other location. We dont need to include exit_node as a source since we never need to compute costs from it
+
+    seen = set()
+    sources = []
+    for node in [spawn] + list(relics):
+        if node not in seen:
+            seen.add(node)
+            sources.append(node)
+            
+    return sources
 
 
 def run_dijkstra(graph, source):
@@ -82,9 +93,29 @@ def run_dijkstra(graph, source):
         Minimum cost from source to every node in graph.
         Unreachable nodes map to float('inf').
 
-    TODO
     """
-    pass
+    # Initilize every node to infinity except the source which is 0
+    dist = {node: float('inf') for node in graph}
+    dist[source] = 0
+
+    # Min-heap to explore nodes in order of increasing distance
+    heap = [(0, source)]  # (distance, node)
+
+    while heap:
+        current_cost, u = heapq.heappop(heap)
+
+        # If we pop a node with a distance greater than the recorded distance, skip it
+        if current_cost > dist[u]:
+            continue
+
+        for v, weight in graph.get(u, []):
+
+            new_cost = current_cost + weight
+
+            if new_cost < dist[v]:
+                dist[v] = new_cost
+                heapq.heappush(heap, (new_cost, v))
+    return dist
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
@@ -102,9 +133,12 @@ def precompute_distances(graph, spawn, relics, exit_node):
         Nested structure supporting dist_table[u][v] lookups
         for every source u your design requires.
 
-    TODO
     """
-    pass
+    sources = select_sources(spawn, relics, exit_node)
+    dist_table = {}
+    for src in sources:
+        dist_table[src] = run_dijkstra(graph, src)
+    return dist_table
 
 
 # =============================================================================

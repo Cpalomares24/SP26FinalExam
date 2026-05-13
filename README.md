@@ -35,8 +35,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Spawn node  | The Torchbearer starts here, so the algorithm needs shortest path costs from this node to every important location  |
+| Relic nodes | The algorithm needs shortest path costs betweeen relic chambers so it can compare different possible collection orders. |
 
 ### Part 2b: Distance Storage
 
@@ -44,20 +44,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Nested ductionary called dist_table |
+| What the keys represent | The outer key is the source node and the inner key is the destination node |
+| What the values represent | The minimum fuel cost from one node to another |
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | Python dictionaries use hash tables, so values can be accessed directly using keys |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** k + 1 runs where k is the number of relics
+- **Cost per run:** 0((V + E) log V)
+- **Total complexity:** O((k + 1) (V + E) log V)
+- **Justification (one line):** The algorithm runs Dijkstra once from the spawn node and once from each relic node so all important shortest path costs are precomputed
 
 ---
 

@@ -29,7 +29,12 @@ solution. I also plan to test each function separately before combining everythi
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+I started with working on implementing Dijkstra's algorithm and the distance precomputation table. I then ran into a bug
+where my code was not precompute_distance was running correctly and this was due to me accidently running 
+sources - select_sources(spawn, relics, exit_node) instead of sources = select_sources(spawn, relics, exit_node). Having the
+minus sign vs the equal sign was causing the function to fail. After fixing that mistake, the distance table started storing shortest path
+results correctly for the spawn node and relic nodes. I also tested the algorithm on smaller graphs first to make sure
+path costs were being calculated correctly before moving on to the recursive search portion.
 
 ---
 
