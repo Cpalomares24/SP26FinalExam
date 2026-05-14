@@ -155,7 +155,7 @@ def dijkstra_invariant_check():
 
     """
     return (
-        "For ndoes already finalized: " \
+        "For nodes already finalized: " \
         "Once a node is finalized, its distance is the true shortest distance from the source. "
         "The algorithm will not need to improve that node again. \n\n" 
 
@@ -163,13 +163,13 @@ def dijkstra_invariant_check():
         "For nodes still outside the finalized set, dist stores the best distance found so far using paths "
         "that only go through already finalized nodes.\n\n"
 
-        "Inititalization: " \
+        "Initialization: " \
         "Before the first loop, the source has distance 0 and every other node starts at infinity. "
         "This is correct because no paths have been explored yet. \n\n"
 
         "Maintenance: " \
         "The algorithm always chooses the unfinished node with the smallest current distance. "
-        "Because all edge weights are nonnegatieve, no later path through another unfinished node can make it cheaper.\n\n "
+        "Because all edge weights are nonnegative, no later path through another unfinished node can make it cheaper.\n\n "
         
         "Termination: " \
         "When the algorithm terminates, all nodes are finalized and their distances are correct. "
@@ -192,9 +192,30 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    TODO
+    
     """
-    return "TODO"
+
+    return (
+        "The failure mode: " \
+        "A greedy strategy can choose the closest relic first but still end up with a more expensive total route"
+
+        "Counter example setup: " \
+        "Suppose S -> B costs 1, S -> C costs 2, B -> C costs 100, C -> B costs 1, "
+        "B -> D costs 1, D -> C costs 1, and both C and B can reach T with costs 1. \n\n"
+
+        "What greedy picks: " \
+        "A greedy algorithm would pick B first because it is the cheapest immediate choice from S.\n\n"
+
+        "What optimal picks: " \
+        "The optimal solution may visit relics in a different order like S -> B -> D -> C -> T "
+        "because the total cost is smaller overall.\n\n"
+
+        "Why greedy loses: " \
+        "Greedy only looks at the next cheapest move and ignores how that choice affects future travel costs.\n\n"
+
+        "What the algorithm must explore: " \
+        "The algorithm must explore different relic collection orders to find the minimum total fuel cost."
+    )
 
 
 # =============================================================================
@@ -219,9 +240,25 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
     """
-    pass
+    best = [float('inf'), []]
+
+    current_loc = spawn
+    relics_remaining = set(relics)
+    relics_visited_order = []
+    cost_so_far = 0
+
+    _explore(
+        dist_table, 
+        current_loc, 
+        relics_remaining, 
+        relics_visited_order,
+        cost_so_far, 
+        exit_node, 
+        best
+        )
+    
+    return best[0], best[1]
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
@@ -253,7 +290,47 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    
+    if not relics_remaining:
+        exit_cost = dist_table[current_loc].get(exit_node, float('inf'))
+        total_cost = cost_so_far + exit_cost
+
+        if total_cost < best[0]:
+            best[0] = total_cost
+            best[1] = list(relics_visited_order)
+        return
+    
+    #Safe pruning: if the cost already spent is not better than the best complete
+    # route found so far, adding more nonnegative edge costs cannot make it cheaper.
+    if cost_so_far >= best[0]:
+        return
+    
+    for relic in list(relics_remaining):
+        travel_cost = dist_table[current_loc].get(relic, float('inf'))
+
+        if travel_cost == float('inf'):
+            continue
+
+        new_cost = cost_so_far + travel_cost
+
+        if new_cost >= best[0]:
+            continue
+
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+
+        _explore(
+            dist_table,
+            relic,
+            relics_remaining,
+            relics_visited_order,
+            new_cost,
+            exit_node,
+            best
+        )
+
+        relics_visited_order.pop()
+        relics_remaining.add(relic)
 
 
 # =============================================================================
@@ -275,9 +352,10 @@ def solve(graph, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
+    
     """
-    pass
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    return find_optimal_route(dist_table, spawn, relics, exit_node)
 
 
 # =============================================================================

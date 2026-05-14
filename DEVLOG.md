@@ -37,27 +37,27 @@ search that explores different relic collection orders.
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [5/14/2026]: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_Your entry here._
+After finishing all implementation I would say the hardest part was combining recursive backtracking with pruning, while also 
+still making sure the algorithm stayed correct. If I had a bit more time I would probably improve the lower bound calculation 
+so the algorithm could prune more branches earlier and run faster on larger graphs. I would also add more custom test
+cases for edge cases like disconnected graphs, multiple equal cost routes, and larger number of relic chambers. 
+Overall, the exam halped me better understand how the shortest path algorithms and combinational search
+problems can work together.
 
 ---
 
-## Final Entry – [Date]: Time Estimate
-
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
+## Final Entry – [5/14/2026]: Time Estimate
 
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part 1: Problem Analysis | 1 |
+| Part 2: Precomputation Design | 2 |
+| Part 3: Algorithm Correctness | 1.5 |
+| Part 4: Search Design | 1.5 |
+| Part 5: State and Search Space | 2 |
+| Part 6: Pruning | 2 |
+| Part 7: Implementation | 4 |
+| README and DEVLOG writing | 1 |
+| **Total** | 15 |
